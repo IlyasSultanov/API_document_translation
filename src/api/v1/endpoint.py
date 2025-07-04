@@ -7,6 +7,7 @@ from ...service.translate import (
     create_translated_docx
 )
 
+
 router = APIRouter(tags=["Translate-docx"])
 
 
