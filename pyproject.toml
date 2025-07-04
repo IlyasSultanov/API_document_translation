@@ -1,0 +1,21 @@
+[project]
+name = "api-document-translation"
+version = "0.1.0"
+description = "API for translating file content into another language"
+authors = [
+    {name = "Sultanov Ilyas",email = "SultanovIlyas0@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi (>=0.115.14,<0.116.0)",
+    "httpx (>=0.28.1,<0.29.0)",
+    "python-docx (>=1.2.0,<2.0.0)",
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "pytest-asyncio (>=1.0.0,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
