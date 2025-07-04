@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 
 import requests
 
+
 API1_URL = "http://34.9.223.19:8000/translate/ru-kk/"
 
 
