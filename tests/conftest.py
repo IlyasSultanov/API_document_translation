@@ -4,7 +4,7 @@ from io import BytesIO
 
 @pytest.fixture
 def mock_upload_file():
-    def _mock_upload_file(content: bytes, filename: str = "test.docx"):
+    def _mock_upload_file(content: bytes, filename: str = "tests.docx"):
         """
 
         :type content: bytes

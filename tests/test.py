@@ -15,9 +15,9 @@ def sample_docx():
     """Фикстура для создания временного DOCX файла"""
     doc = docx.Document()
     doc.add_paragraph("Hello world")
-    doc.add_paragraph("This is a test")
+    doc.add_paragraph("This is a tests")
     temp_dir = tempfile.mkdtemp()
-    file_path = os.path.join(temp_dir, "test.docx")
+    file_path = os.path.join(temp_dir, "tests.docx")
     doc.save(file_path)
     yield file_path
     os.remove(file_path)
@@ -39,7 +39,7 @@ def test_translate_docx_success(sample_docx, mock_translate):
     with open(sample_docx, "rb") as f:
         response = client.post(
             "/translate_docx/",
-            files={"file": ("test.docx", f, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")}
+            files={"file": ("tests.docx", f, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")}
         )
 
     assert response.status_code == 200
@@ -51,7 +51,7 @@ def test_translate_docx_invalid_format():
     """Тест загрузки файла неверного формата"""
     response = client.post(
         "/translate_docx/",
-        files={"file": ("test.txt", b"test content", "text/plain")}
+        files={"file": ("tests.txt", b"tests content", "text/plain")}
     )
     assert response.status_code == 400
     assert "Only .docx files are accepted" in response.json()["detail"]
@@ -62,9 +62,9 @@ async def test_process_docx(sample_docx):
     """Тест извлечения текста из DOCX"""
     from src.service.translate import process_docx
     with open(sample_docx, "rb") as f:
-        text = await process_docx(UploadFile(filename="test.docx", file=f))
+        text = await process_docx(UploadFile(filename="tests.docx", file=f))
     assert "Hello world" in text
-    assert "This is a test" in text
+    assert "This is a tests" in text
 
 
 @pytest.mark.asyncio
@@ -85,7 +85,7 @@ async def test_create_translated_docx(sample_docx):
     """Тест создания переведенного DOCX"""
     from src.service.translate import create_translated_docx
     with open(sample_docx, "rb") as f:
-        file = UploadFile(filename="test.docx", file=f)
+        file = UploadFile(filename="tests.docx", file=f)
         output_path = await create_translated_docx(file, "Привет мир\nЭто тест")
 
         assert os.path.exists(output_path)
