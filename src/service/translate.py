@@ -4,6 +4,7 @@ import tempfile
 from fastapi import UploadFile, HTTPException
 
 
+
 async def process_docx(file: UploadFile) -> str:
     """Извлекает текст из docx файла"""
     try:
